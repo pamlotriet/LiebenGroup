@@ -17,19 +17,22 @@ namespace LiebenGroupServer.Application.Handlers.Order
 
         public async Task Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
+            var existingOrder = await _orderRepository.GetByIdAsync(request.Id);
+            if (existingOrder == null)
+                throw new KeyNotFoundException($"Order with ID {request.Id} not found.");
 
-          
-                var existingOrder = await _orderRepository.GetByIdAsync(request.Id);
-                if (existingOrder == null)
-                    throw new KeyNotFoundException($"Order with ID {request.Id} not found.");
-
-                existingOrder.OrderDate = request.OrderDate;
+            existingOrder.OrderDate = request.OrderDate;
                
-                List<OrderLineItem> updatedLineItems = request.Items.Adapt<List<OrderLineItem>>();
+            List<OrderLineItem> updatedLineItems = request.Items.Adapt<List<OrderLineItem>>();
 
-
+            try
+            {
                 await _orderRepository.UpdateAsync(existingOrder, updatedLineItems);
-       
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

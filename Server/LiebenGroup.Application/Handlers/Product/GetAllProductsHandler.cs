@@ -1,14 +1,8 @@
 ﻿using LiebenGroupServer.Application.Dto;
 using LiebenGroupServer.Application.Queries.Product;
-using LiebenGroupServer.DataAccess.Models;
 using LiebenGroupServer.DataAccess.Repostories.Interfaces;
 using Mapster;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LiebenGroupServer.Application.Handlers.Product
 {

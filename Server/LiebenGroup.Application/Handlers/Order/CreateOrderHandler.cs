@@ -26,11 +26,15 @@ namespace LiebenGroupServer.Application.Handlers.Order
 
             if (request.OrderDate > DateTime.UtcNow)
                 throw new ValidationException("Order date cannot be in the future.");
-          
+            try
+            {
                 LiebenGroupServer.DataAccess.Models.Order order = new { request.OrderDate, request.TotalAmount }.Adapt<LiebenGroupServer.DataAccess.Models.Order>();
                 await _orderRepository.AddAsync(order, request.Items.Adapt<List<OrderLineItem>>());
-            
-            
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }
