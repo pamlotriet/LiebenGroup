@@ -6,9 +6,7 @@ using Mapster;
 using MediatR;
 
 namespace LiebenGroupServer.Application.Handlers.Product
-{
-   
-
+{ 
     public class GetProductByIdHandler: IRequestHandler<GetProductByIdQuery, ProductDto>
     {
         private readonly IProductRepository _productRepository;

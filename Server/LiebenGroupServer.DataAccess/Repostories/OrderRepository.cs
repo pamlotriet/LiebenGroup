@@ -17,9 +17,6 @@ namespace LiebenGroupServer.DataAccess.Repostories
 
         public async Task AddAsync(Order order, List<OrderLineItem> lineItems)
         {
-            if (lineItems == null || lineItems.Count == 0)
-                throw new ArgumentException("An order must contain at least one line item.");
-
             order.Items.AddRange(lineItems);
 
             await _dbContext.Orders.AddAsync(order);
@@ -62,10 +59,6 @@ namespace LiebenGroupServer.DataAccess.Repostories
                 .Include(o => o.Items)
                 .FirstOrDefaultAsync(o => o.Id == order.Id);
 
-            if (existingOrder == null)
-                throw new KeyNotFoundException("Order not found.");
-
-            
             existingOrder.OrderDate = order.OrderDate;
             
             existingOrder.Items.RemoveAll(existingItem =>

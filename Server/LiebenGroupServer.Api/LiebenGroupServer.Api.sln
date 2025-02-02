@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiebenGroupServer.Applicati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiebenGroupServer.DataAccess", "..\LiebenGroupServer.DataAccess\LiebenGroupServer.DataAccess.csproj", "{1D0E7123-761A-43BD-A8BC-625BCDDF42E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiebenGroupServer.Tests", "..\LiebenGroupServer.Tests\LiebenGroupServer.Tests.csproj", "{BFB4579F-B133-4769-8A7F-585C9035C750}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{1D0E7123-761A-43BD-A8BC-625BCDDF42E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D0E7123-761A-43BD-A8BC-625BCDDF42E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D0E7123-761A-43BD-A8BC-625BCDDF42E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFB4579F-B133-4769-8A7F-585C9035C750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFB4579F-B133-4769-8A7F-585C9035C750}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFB4579F-B133-4769-8A7F-585C9035C750}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFB4579F-B133-4769-8A7F-585C9035C750}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
