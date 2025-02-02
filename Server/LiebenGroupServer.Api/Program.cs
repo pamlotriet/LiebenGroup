@@ -1,4 +1,6 @@
 using LiebenGroupServer.DataAccess.DatabaseContext;
+using LiebenGroupServer.DataAccess.Repostories;
+using LiebenGroupServer.DataAccess.Repostories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +29,9 @@ builder.Services.AddDbContext<DBContext>(options =>
         options.UseSqlServer (Configuration.GetConnectionString("DbConnection")));
 
 
+//DI
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+        
 
 var app = builder.Build();
 

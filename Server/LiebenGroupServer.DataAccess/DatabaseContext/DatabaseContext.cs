@@ -26,6 +26,14 @@ namespace LiebenGroupServer.DataAccess.DatabaseContext
                 .HasMany(p => p.OrderLineItems)
                 .WithOne(ol => ol.Product)
                 .HasForeignKey(ol => ol.ProductId);
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Order>()
+                .Property(p => p.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }
