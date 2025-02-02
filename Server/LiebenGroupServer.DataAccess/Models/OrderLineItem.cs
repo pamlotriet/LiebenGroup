@@ -15,5 +15,10 @@ namespace LiebenGroupServer.DataAccess.Models
         public decimal TotalPrice => Quantity * UnitPrice;
         public Order Order { get; private set; }
         public Product Product { get; private set; }
+        public void UpdateQuantityAndPrice(int quantity, decimal unitPrice)
+        {
+            Quantity = quantity;
+            UnitPrice = unitPrice;
+        }
     }
 }

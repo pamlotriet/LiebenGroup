@@ -20,7 +20,8 @@ namespace LiebenGroupServer.DataAccess.DatabaseContext
             modelBuilder.Entity<Order>()
                 .HasMany(o => o.Items)
                 .WithOne(o => o.Order)
-                .HasForeignKey(o => o.OrderId);
+                .HasForeignKey(o => o.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Product>()
                 .HasMany(p => p.OrderLineItems)

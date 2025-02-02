@@ -1,6 +1,9 @@
+using LiebenGroupServer.Application.Dto;
 using LiebenGroupServer.DataAccess.DatabaseContext;
+using LiebenGroupServer.DataAccess.Models;
 using LiebenGroupServer.DataAccess.Repostories;
 using LiebenGroupServer.DataAccess.Repostories.Interfaces;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,15 +26,19 @@ builder.Services.AddCors(options =>
 });
 
 
+// Configure Mapster
+var config = TypeAdapterConfig.GlobalSettings;
+
+
+//define mappings 
+config.NewConfig<OrderDto, Order>();
+
 // Add database context 
 var Configuration = builder.Configuration;
 builder.Services.AddDbContext<DBContext>(options =>
         options.UseSqlServer (Configuration.GetConnectionString("DbConnection")));
 
 
-//DI
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-        
 
 var app = builder.Build();
 

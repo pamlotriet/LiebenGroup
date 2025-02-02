@@ -8,10 +8,9 @@ namespace LiebenGroupServer.DataAccess.Models
 {
     public class Order
     {
-        public Guid Id { get; private set; }
-        public Guid UserId { get; private set; }
-        public List<OrderLineItem> Items { get; private set; } = new();
-        public DateTime OrderDate { get; private set; }
+        public Guid Id { get;  set; }
+        public List<OrderLineItem> Items { get;  set; } = new();
+        public DateTime OrderDate { get;  set; }
         public decimal TotalAmount => Items.Sum(i => i.TotalPrice); 
     }
 }
