@@ -8,7 +8,12 @@ namespace LiebenGroupServer.Application.Dto
 {
     public class ProductDto
     {
-        public Guid Id { get; set; }
+        public ProductDto(string name, decimal price)
+        {
+            Name = name;
+            Price = price;
+        }
+
         public string Name { get; set; }
         public decimal Price { get; set; }
     }

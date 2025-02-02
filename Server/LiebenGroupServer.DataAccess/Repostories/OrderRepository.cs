@@ -41,6 +41,7 @@ namespace LiebenGroupServer.DataAccess.Repostories
         public async Task<IEnumerable<Order>> GetAllAsync()
         {
             return await _dbContext.Orders
+                .AsNoTracking()
                 .Include(x => x.Items)
                 .ThenInclude(p => p.Product)
                 .ToListAsync();
@@ -48,7 +49,9 @@ namespace LiebenGroupServer.DataAccess.Repostories
 
         public async Task<Order?> GetByIdAsync(Guid id)
         {
-            return await _dbContext.Orders.Include(x => x.Items)
+            return await _dbContext.Orders
+                .AsNoTracking()
+                .Include(x => x.Items)
                 .ThenInclude(p => p.Product)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }

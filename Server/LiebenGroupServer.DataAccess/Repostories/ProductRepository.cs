@@ -33,12 +33,16 @@ namespace LiebenGroupServer.DataAccess.Repostories
 
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            return await _context.Products.AsNoTracking().ToListAsync();    
+            return await _context.Products
+                .AsNoTracking()
+                .ToListAsync();    
         }
 
         public async Task<Product> GetByIdAsync(Guid id)
         {
-            return await _context.Products.SingleAsync(x => x.Id == id);
+            return await _context.Products
+                .AsNoTracking()
+                .SingleAsync(x => x.Id == id);
         }
 
         public async Task UpdateAsync(Product entity)

@@ -19,10 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\LiebenGroup.Application\LiebenGroupServer.Application.csproj" />
     <ProjectReference Include="..\LiebenGroupServer.DataAccess\LiebenGroupServer.DataAccess.csproj" />
   </ItemGroup>
 
