@@ -24,6 +24,10 @@ namespace LiebenGroupServer.Application.Handlers.Product
         public async Task<IEnumerable<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             IEnumerable<LiebenGroupServer.DataAccess.Models.Product> products = await _productRepository.GetAllAsync();
+
+            if (products == null)
+                return new List<ProductDto>();
+
             return products.Adapt<List<ProductDto>>();
         }
     }

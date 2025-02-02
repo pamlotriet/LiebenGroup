@@ -3,6 +3,7 @@ using LiebenGroupServer.DataAccess.Models;
 using LiebenGroupServer.DataAccess.Repostories.Interfaces;
 using Mapster;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace LiebenGroupServer.Application.Handlers.Order
 {
@@ -17,8 +18,19 @@ namespace LiebenGroupServer.Application.Handlers.Order
 
         public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            LiebenGroupServer.DataAccess.Models.Order order = new {request.OrderDate,request.TotalAmount}.Adapt<LiebenGroupServer.DataAccess.Models.Order>();
-            await _orderRepository.AddAsync(order, request.Items.Adapt<List<OrderLineItem>>());
+            if (request.Items == null || request.Items.Count == 0)
+                throw new ValidationException("An order must contain at least one item.");
+
+            if (request.TotalAmount <= 0)
+                throw new ValidationException("TotalAmount must be greater than zero.");
+
+            if (request.OrderDate > DateTime.UtcNow)
+                throw new ValidationException("Order date cannot be in the future.");
+          
+                LiebenGroupServer.DataAccess.Models.Order order = new { request.OrderDate, request.TotalAmount }.Adapt<LiebenGroupServer.DataAccess.Models.Order>();
+                await _orderRepository.AddAsync(order, request.Items.Adapt<List<OrderLineItem>>());
+            
+            
         }
     }
 }

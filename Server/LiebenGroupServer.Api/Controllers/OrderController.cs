@@ -1,5 +1,6 @@
 ﻿using LiebenGroupServer.Application.Commands.Order;
 using LiebenGroupServer.Application.Dto;
+using LiebenGroupServer.Application.Queries.Order;
 using LiebenGroupServer.Application.Queries.Product;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -33,24 +34,24 @@ namespace LiebenGroupServer.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateProduct([FromBody] CreateUpdateOrderDto dto)
+        public async Task<IActionResult> UpdateOrder([FromBody] UpdateOrderDto dto)
         {
-            var command = new UpdateOrderCommand(dto.OrderDate, dto.TotalAmount, dto.Items);
+            var command = new UpdateOrderCommand(dto.OrderDate, dto.TotalAmount, dto.Items, dto.Id);
             await _mediator.Send(command);
             return Ok();
         }
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductById(Guid id)
+        public async Task<IActionResult> GetOrderById(Guid id)
         {
-            return Ok(await _mediator.Send(new GetProductByIdQuery(id)));
+            return Ok(await _mediator.Send(new GetOrderByIdQuery(id)));
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllOrders()
         {
-            return Ok(await _mediator.Send(new GetAllProductsQuery()));
+            return Ok(await _mediator.Send(new GetAllOrdersQuery()));
         }
     }
 }

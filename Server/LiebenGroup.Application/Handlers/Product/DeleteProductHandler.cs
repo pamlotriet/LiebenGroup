@@ -21,6 +21,9 @@ namespace LiebenGroupServer.Application.Handlers.Product
 
         public async Task Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
+            var existingProduct = await _productRepository.GetByIdAsync(request.Id);
+            if (existingProduct == null)
+                throw new KeyNotFoundException($"Product with ID {request.Id} not found."); // ✅ 404 Not Found
             await _productRepository.DeleteAsync(request.Id);
         }
     }

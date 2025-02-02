@@ -19,7 +19,7 @@ namespace LiebenGroupServer.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] UpdateAddProductDto dto)
+        public async Task<IActionResult> CreateProduct([FromBody] AddProductDto dto)
         {
             var command = new CreateProductCommand(dto.Name, dto.Price);
             await _mediator.Send(command);
@@ -34,9 +34,9 @@ namespace LiebenGroupServer.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateProduct([FromBody] UpdateAddProductDto dto)
+        public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductDto dto)
         {
-            var command = new UpdateProductCommand(dto.Name, dto.Price);
+            var command = new UpdateProductCommand(dto.Name, dto.Price,dto.Id);
              await _mediator.Send(command);
             return Ok();
         }

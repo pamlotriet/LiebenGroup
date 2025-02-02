@@ -18,8 +18,17 @@ namespace LiebenGroupServer.Application.Handlers.Order
 
         public async Task<OrderDto> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            LiebenGroupServer.DataAccess.Models.Order? order = await _orderRepository.GetByIdAsync(request.Id);
-            return order.Adapt<OrderDto>();
+
+          
+                LiebenGroupServer.DataAccess.Models.Order? order = await _orderRepository.GetByIdAsync(request.Id);
+               
+                if (order == null)
+                    throw new KeyNotFoundException($"Order with ID {request.Id} not found."); // ✅ 404 Not Found
+
+                return order.Adapt<OrderDto>();
+            
+          
+
         }
     }
 }

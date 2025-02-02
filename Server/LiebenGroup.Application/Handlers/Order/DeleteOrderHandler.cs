@@ -16,7 +16,17 @@ namespace LiebenGroupServer.Application.Handlers.Order
 
         public async Task Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
         {
-             await _orderRepository.DeleteAsync(request.Id);
+
+           
+                LiebenGroupServer.DataAccess.Models.Order existingOrder = await _orderRepository.GetByIdAsync(request.Id);
+                if (existingOrder == null)
+                    throw new KeyNotFoundException($"Order with ID {request.Id} not found."); // ✅ 404 Not Found
+
+                await _orderRepository.DeleteAsync(request.Id);
+            
+      
+      
         }
+
     }
 }

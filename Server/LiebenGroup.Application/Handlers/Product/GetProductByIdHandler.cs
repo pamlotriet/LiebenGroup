@@ -20,7 +20,11 @@ namespace LiebenGroupServer.Application.Handlers.Product
         public async Task<ProductDto> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
             LiebenGroupServer.DataAccess.Models.Product product = await _productRepository.GetByIdAsync(request.Id);
-          return product.Adapt<ProductDto>();
+
+            if (product == null)
+                throw new KeyNotFoundException($"Product with ID {request.Id} not found."); // ✅ 404 Not Found
+
+            return product.Adapt<ProductDto>();
         }
     }
 }

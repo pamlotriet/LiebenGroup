@@ -1,4 +1,5 @@
 
+using LiebenGroupServer.Api.Middelware;
 using LiebenGroupServer.Application.Commands.Product;
 using LiebenGroupServer.Application.Dto;
 using LiebenGroupServer.DataAccess.DatabaseContext;
@@ -66,7 +67,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseMiddleware<ExceptionHandler>();
 app.MapControllers();
 
 app.Run();
