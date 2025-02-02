@@ -1,0 +1,79 @@
+# Ignore Visual Studio specific files
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore build artifacts
+bin/
+obj/
+out/
+Debug/
+Release/
+*.exe
+*.dll
+*.pdb
+*.log
+*.cache
+
+# Ignore user-secrets and environment configs
+appsettings.Development.json
+secrets.json
+.env
+
+# Ignore dependency directories
+node_modules/
+packages/
+
+# Ignore logs, lock files, and generated files
+*.log
+*.lock
+*.pid
+*.seed
+*.swp
+*.swo
+*.bak
+
+# Ignore NuGet packages
+*.nupkg
+project.lock.json
+project.assets.json
+NuGet.Config
+NuGetScratch/
+packages/
+global.json
+
+# Ignore Resharper, Rider & other JetBrains IDEs
+.idea/
+*.sln.iml
+
+# Ignore Entity Framework migrations if auto-generated
+Migrations/
+
+# Ignore database-related files
+*.mdf
+*.ldf
+*.db-shm
+*.db-wal
+*.sqlite
+
+# Ignore publish artifacts
+publish/
+wwwroot/
+dist/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore coverage reports
+coverage/
+*.coverage
+*.coveragexml
+TestResults/
+
+# Ignore generated files
+Generated/
+_Dependencies/
+Generated_Code/
