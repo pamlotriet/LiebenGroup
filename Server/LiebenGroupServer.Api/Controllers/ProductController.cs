@@ -22,23 +22,23 @@ namespace LiebenGroupServer.Api.Controllers
         public async Task<IActionResult> CreateProduct([FromBody] UpdateAddProductDto dto)
         {
             var command = new CreateProductCommand(dto.Name, dto.Price);
-            var createdProduct = await _mediator.Send(command);
-            return Ok(createdProduct);
+            await _mediator.Send(command);
+            return Ok();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(Guid id)
         {
-            var deletedid = await _mediator.Send(new DeleteProductCommand(id));
-            return Ok(deletedid);
+            await _mediator.Send(new DeleteProductCommand(id));
+            return Ok();
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateProduct([FromBody] UpdateAddProductDto dto)
         {
             var command = new UpdateProductCommand(dto.Name, dto.Price);
-            var createdProduct = await _mediator.Send(command);
-            return Ok(createdProduct);
+             await _mediator.Send(command);
+            return Ok();
         }
 
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LiebenGroupServer.Application.Commands.Product
 {
-    public class DeleteProductCommand: IRequest<Guid>
+    public class DeleteProductCommand: IRequest
     {
         public Guid Id { get; }
 

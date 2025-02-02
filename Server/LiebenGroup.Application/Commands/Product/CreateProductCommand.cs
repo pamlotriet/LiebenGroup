@@ -3,7 +3,7 @@ using MediatR;
 
 namespace LiebenGroupServer.Application.Commands.Product
 {
-    public class CreateProductCommand : IRequest<ProductDto>
+    public class CreateProductCommand : IRequest
     {
         public string Name { get; }
         public decimal Price { get; }

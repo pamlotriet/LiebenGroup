@@ -6,7 +6,7 @@ using MediatR;
 
 namespace LiebenGroupServer.Application.Handlers.Product
 {
-    public class UpdateProductHandler :  IRequestHandler<UpdateProductCommand, ProductDto>
+    public class UpdateProductHandler :  IRequestHandler<UpdateProductCommand>
     {
         private readonly IProductRepository _productRepository;
 
@@ -15,12 +15,10 @@ namespace LiebenGroupServer.Application.Handlers.Product
             _productRepository = productRepository;
         }
 
-        public async Task<ProductDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             ProductDto product = new(request.Name, request.Price);
             await _productRepository.UpdateAsync(product.Adapt<LiebenGroupServer.DataAccess.Models.Product>());
-
-            return product;
         }
     }
 }

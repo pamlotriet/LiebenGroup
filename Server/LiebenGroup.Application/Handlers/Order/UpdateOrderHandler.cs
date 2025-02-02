@@ -15,10 +15,10 @@ namespace LiebenGroupServer.Application.Handlers.Order
             _orderRepository = orderRepository;
         }
 
-        public Task Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = new { request.OrderDate, request.TotalAmount }.Adapt<LiebenGroupServer.DataAccess.Models.Order>();
-            return _orderRepository.UpdateAsync(order, request.Items.Adapt<List<OrderLineItem>>());
+            LiebenGroupServer.DataAccess.Models.Order order = new { request.OrderDate, request.TotalAmount }.Adapt<LiebenGroupServer.DataAccess.Models.Order>();
+            await _orderRepository.UpdateAsync(order, request.Items.Adapt<List<OrderLineItem>>());
         }
     }
 }

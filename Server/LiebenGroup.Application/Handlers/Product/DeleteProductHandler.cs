@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LiebenGroupServer.Application.Handlers.Product
 {
-    public class DeleteProductHandler : IRequestHandler<DeleteProductCommand, Guid>
+    public class DeleteProductHandler : IRequestHandler<DeleteProductCommand>
     {
         private readonly IProductRepository _productRepository;
 
@@ -19,10 +19,9 @@ namespace LiebenGroupServer.Application.Handlers.Product
             _productRepository = productRepository;
         }
 
-        public async Task<Guid> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
             await _productRepository.DeleteAsync(request.Id);
-            return request.Id;
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LiebenGroupServer.Application.Commands.Product
 {
-    public class UpdateProductCommand: IRequest<ProductDto>
+    public class UpdateProductCommand: IRequest
     {
         public string Name { get; }
         public decimal Price { get; }
