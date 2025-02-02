@@ -6,22 +6,9 @@ using System.Threading.Tasks;
 
 namespace LiebenGroupServer.Application.Dto
 {
-    public class ProductDto
+    public class UpdateAddProductDto
     {
-        public ProductDto(string name, decimal price)
-        {
-            Name = name;
-            Price = price;
-        }
-
-
-        //for mapster to work
-        public ProductDto() { }
-
-
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
     }
-
 }
