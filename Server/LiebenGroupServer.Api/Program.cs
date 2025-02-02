@@ -1,3 +1,6 @@
+using LiebenGroupServer.DataAccess.DatabaseContext;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +19,13 @@ builder.Services.AddCors(options =>
             policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
         });
 });
+
+
+// Add database context 
+var Configuration = builder.Configuration;
+builder.Services.AddDbContext<DBContext>(options =>
+        options.UseSqlServer (Configuration.GetConnectionString("DbConnection")));
+
 
 
 var app = builder.Build();
