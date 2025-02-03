@@ -1,0 +1,21 @@
+<form [formGroup]="orderForm" class="h-screen w-screen flex flex-col p-12">
+    <app-input type="date" [control]="$any(orderForm.controls['dateCreated'])"></app-input>
+
+    <h3>Order Items</h3>
+
+    @for (item of getItems().controls; track item; let i = $index) {
+    <div class="flex flex-row gap-4 items-center mt-4 mb-4 ">
+        <app-dropdown [options]="products()" optionLabel="name" optionValue="id" placeholder="Select a Product"
+            [control]="$any(item.get('productId'))" (valueChange)="onProductSelect($event, i)">
+        </app-dropdown>
+        <app-input type="number" labelText="Quantity" [control]="$any(item.get('quantity'))"></app-input>
+        <div class="border-1 rounded-full" (click)="removeItem(i)">
+            <i class="pi pi-minus p-3"></i>
+        </div>
+        <div class="border-1 rounded-full" (click)="addItem()">
+            <i class="pi pi-plus p-3"></i>
+        </div>
+    </div>
+    }
+    <app-button labelText="Add Order" (actionEvent)="addOrder()"></app-button>
+</form>

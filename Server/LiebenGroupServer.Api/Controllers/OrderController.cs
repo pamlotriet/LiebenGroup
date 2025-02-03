@@ -21,7 +21,7 @@ namespace LiebenGroupServer.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] CreateUpdateOrderDto dto)
         {
-            var command = new CreateOrderCommand(dto.OrderDate,dto.TotalAmount,dto.Items);
+            var command = new CreateOrderCommand(dto.OrderDate,dto.Items);
             await _mediator.Send(command);
             return Ok();
         }

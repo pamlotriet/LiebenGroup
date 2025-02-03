@@ -6,13 +6,11 @@ namespace LiebenGroupServer.Application.Commands.Order
     {
 
         public DateTime OrderDate { get; set; }
-        public decimal TotalAmount { get; set; }
         public List<OrderLineItemDto> Items { get; set; }
 
-        public CreateOrderCommand(DateTime orderDate, decimal totalAmount, List<OrderLineItemDto> items)
+        public CreateOrderCommand(DateTime orderDate, List<OrderLineItemDto> items)
         {
             OrderDate = orderDate;
-            TotalAmount = totalAmount;
             Items = items;
         }
     }
