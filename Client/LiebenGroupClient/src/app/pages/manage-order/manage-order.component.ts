@@ -55,8 +55,6 @@ export class ManageOrderComponent implements OnInit {
   getOrder(id: string) {
     this.orderService.getOrderById(id).subscribe((order) => {
       this.order = order;
-      console.log(order);
-      // console.log(order.OrderDate.toString().split('T')[0]);
       this.orderForm.patchValue({
         id: order.id,
         OrderDate: order.orderDate?.split('T')[0],
@@ -127,7 +125,6 @@ export class ManageOrderComponent implements OnInit {
   }
 
   onProductSelect(event: any, index: number) {
-    debugger;
     const selectedProductId = event;
     const selectedProduct = this.products().find(
       (p) => p.id === selectedProductId
@@ -136,12 +133,11 @@ export class ManageOrderComponent implements OnInit {
     if (!selectedProduct) return;
 
     const itemsArray = this.getItems();
+
     itemsArray.at(index)?.patchValue({
       unitPrice: selectedProduct.price,
       productName: selectedProduct.name,
     });
-
-    console.log(this.orderForm.value);
   }
 
   addOrder() {

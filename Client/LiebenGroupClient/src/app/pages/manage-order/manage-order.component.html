@@ -18,6 +18,6 @@
     </div>
     }
 
-    <app-button [labelText]="orderId ? 'Add Order' : 'Update'"
+    <app-button [labelText]="orderId ? 'Update' : 'Add order'"
         (actionEvent)="orderId ? updateOrder() : addOrder()"></app-button>
 </form>

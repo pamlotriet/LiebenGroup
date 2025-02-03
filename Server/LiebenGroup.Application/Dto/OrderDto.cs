@@ -13,6 +13,7 @@ namespace LiebenGroupServer.Application.Dto
         [Required] 
         [MinLength(1, ErrorMessage = "An order must contain at least one item.")]
         public List<OrderLineItemDto> Items { get; set; } = new();
+        public decimal TotalAmount { get; set; }
     }
 
 }

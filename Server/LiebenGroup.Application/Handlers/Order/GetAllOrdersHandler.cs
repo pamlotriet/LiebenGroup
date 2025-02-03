@@ -17,12 +17,18 @@ namespace LiebenGroupServer.Application.Handlers.Order
 
         public async Task<IEnumerable<OrderDto>> Handle(GetAllOrdersQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<LiebenGroupServer.DataAccess.Models.Order> orders = await _orderRepository.GetAllAsync();
+            var orders = await _orderRepository.GetAllAsync();
 
-            if (orders == null)
+            if (orders == null || !orders.Any())
                 return new List<OrderDto>();
 
-            return orders.Adapt<IEnumerable<OrderDto>>();
+            return orders.Select(order => new OrderDto
+            {
+                Id = order.Id,
+                OrderDate = order.OrderDate,
+                Items = order.Items.Adapt<List<OrderLineItemDto>>(),
+                TotalAmount = order.Items.Sum(i => i.TotalPrice) 
+            });
         }
     }
 }

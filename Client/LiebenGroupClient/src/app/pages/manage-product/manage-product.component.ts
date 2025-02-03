@@ -76,7 +76,6 @@ export class ManageProductComponent implements OnInit {
 
     this.productService.updateProduct(updatedProduct).subscribe({
       next: () => {
-        console.log('Product updated successfully');
         this.navigateHome();
       },
       error: (err) => console.error('Error updating product:', err),
