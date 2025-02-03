@@ -14,6 +14,8 @@ import { Product } from '../../shared/models/products.models';
 import { ProductService } from '../../shared/services/product.service';
 import { OrderService } from '../../shared/services/order.service';
 import { ButtonComponent } from '../../shared/components/button/button.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Order } from '../../shared/models/orders.models';
 
 @Component({
   selector: 'app-manage-order',
@@ -31,18 +33,62 @@ export class ManageOrderComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
   private productService = inject(ProductService);
   private orderService = inject(OrderService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  orderId: string = '';
   orderForm!: FormGroup;
+  order!: Order;
   products = signal<Product[]>([]);
 
   ngOnInit(): void {
     this.createForm();
     this.loadProducts();
+
+    this.route.queryParams.subscribe((params) => {
+      this.orderId = params['orderId'];
+      if (this.orderId) {
+        this.getOrder(this.orderId);
+      }
+    });
+  }
+
+  getOrder(id: string) {
+    this.orderService.getOrderById(id).subscribe((order) => {
+      this.order = order;
+      console.log(order);
+      // console.log(order.OrderDate.toString().split('T')[0]);
+      this.orderForm.patchValue({
+        id: order.id,
+        OrderDate: order.orderDate?.split('T')[0],
+      });
+
+      const itemsArray = this.getItems();
+      itemsArray.clear();
+
+      order.items.forEach((item) => {
+        itemsArray.push(
+          this.formBuilder.group({
+            productId: new FormControl(item.productId, Validators.required),
+            productName: new FormControl(item.productName, Validators.required),
+            unitPrice: new FormControl(item.unitPrice, [
+              Validators.required,
+              Validators.min(0.01),
+            ]),
+            quantity: new FormControl(item.quantity, [
+              Validators.required,
+              Validators.min(1),
+            ]),
+          })
+        );
+      });
+    });
   }
 
   createForm() {
     this.orderForm = this.formBuilder.group({
-      dateCreated: new FormControl(
-        new Date().toISOString(),
+      id: new FormControl(''),
+      OrderDate: new FormControl(
+        new Date().toISOString().split('T')[0],
         Validators.required
       ),
       items: this.formBuilder.array([]),
@@ -99,7 +145,24 @@ export class ManageOrderComponent implements OnInit {
   }
 
   addOrder() {
-    console.log(this.orderForm.value);
-    this.orderService.createOrder(this.orderForm.value).subscribe();
+    const orderData = {
+      ...this.orderForm.value,
+      OrderDate: new Date(this.orderForm.value.OrderDate).toISOString(),
+    };
+
+    this.orderService
+      .createOrder(orderData)
+      .subscribe(() => this.router.navigateByUrl(''));
+  }
+
+  updateOrder() {
+    const orderData = {
+      ...this.orderForm.value,
+      OrderDate: new Date(this.orderForm.value.OrderDate).toISOString(),
+    };
+
+    this.orderService
+      .updateOrder(orderData)
+      .subscribe(() => this.router.navigateByUrl(''));
   }
 }

@@ -36,7 +36,7 @@ namespace LiebenGroupServer.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateOrder([FromBody] UpdateOrderDto dto)
         {
-            var command = new UpdateOrderCommand(dto.OrderDate, dto.TotalAmount, dto.Items, dto.Id);
+            var command = new UpdateOrderCommand(dto.OrderDate, dto.Items, dto.Id);
             await _mediator.Send(command);
             return Ok();
         }

@@ -1,5 +1,5 @@
 <form [formGroup]="orderForm" class="h-screen w-screen flex flex-col p-12">
-    <app-input type="date" [control]="$any(orderForm.controls['dateCreated'])"></app-input>
+    <app-input type="date" [control]="$any(orderForm.controls['OrderDate'])"></app-input>
 
     <h3>Order Items</h3>
 
@@ -17,5 +17,7 @@
         </div>
     </div>
     }
-    <app-button labelText="Add Order" (actionEvent)="addOrder()"></app-button>
+
+    <app-button [labelText]="orderId ? 'Add Order' : 'Update'"
+        (actionEvent)="orderId ? updateOrder() : addOrder()"></app-button>
 </form>
