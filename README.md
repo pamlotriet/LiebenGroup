@@ -28,7 +28,7 @@ Ensure you have the following installed:
 ## **🖥️ Backend Setup (.NET Core API)**
 ### **Clone the Repository**
 ```sh
-git clone https://github.com/your-repo-name.git
+git clone https://github.com/pamlotriet/LiebenGroup.git
 cd LiebenGroup/Server
 ```
 
