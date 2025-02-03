@@ -1,0 +1,15 @@
+<div class="flex h-screen flex-col bg-gray-50 rounded-lg justify-center items-center">
+    <div class="grid grid-cols-3 gap-8">
+        <div class="col-span-1">
+            <app-input [control]="$any(productForm.controls['Name'])" labelText="Product Name"></app-input>
+        </div>
+        <div class="col-span-1">
+            <app-input [control]="$any(productForm.controls['Price'])" labelText="Product Price"
+                type="number"></app-input>
+        </div>
+        <div class="col-span-1">
+            <app-button (actionEvent)="productId ? updateProduct() : addProduct()"
+                [labelText]="productId ? 'Save' : 'Add'"></app-button>
+        </div>
+    </div>
+</div>

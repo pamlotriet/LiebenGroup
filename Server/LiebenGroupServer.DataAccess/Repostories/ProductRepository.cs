@@ -23,7 +23,7 @@ namespace LiebenGroupServer.DataAccess.Repostories
 
         public async Task DeleteAsync(Guid id)
         {
-            Product product = await _context.Products.SingleAsync(x => x.Id == id);
+            Product product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
             if (product != null)
             {
                 _context.Products.Remove(product);
@@ -38,11 +38,11 @@ namespace LiebenGroupServer.DataAccess.Repostories
                 .ToListAsync();    
         }
 
-        public async Task<Product> GetByIdAsync(Guid id)
+        public async Task<Product?> GetByIdAsync(Guid id)
         {
             return await _context.Products
                 .AsNoTracking()
-                .SingleAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task UpdateAsync(Product entity)

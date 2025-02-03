@@ -17,8 +17,12 @@
             </td>
             }
             <td>
-                <i class="pi pi-pencil" (click)="editItemAction()"></i>
-                <i class="pi pi-trash" (click)="deleteItemAction()"></i>
+                <div class="flex flex-row">
+                    <div class="flex mr-4">
+                        <i class="pi pi-pencil" (click)="editItemAction(rowData.id)"></i>
+                    </div>
+                    <i class="pi pi-trash" (click)="deleteItemAction(rowData.id)"></i>
+                </div>
             </td>
         </tr>
 

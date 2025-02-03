@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { TableModule } from 'primeng/table';
+import { ProductService } from '../../services/product.service';
 @Component({
   selector: 'app-table',
   standalone: true,
@@ -9,14 +10,15 @@ import { TableModule } from 'primeng/table';
 export class TableComponent {
   columns = input<any[]>([]);
   items = input<any[]>([]);
-  actionEventEdit = output<void>();
-  actionEventDelete = output<void>();
+  productService = inject(ProductService);
+  actionEventEdit = output<string>();
+  actionEventDelete = output<string>();
 
-  editItemAction() {
-    this.actionEventEdit.emit();
+  editItemAction(id: string) {
+    this.actionEventEdit.emit(id);
   }
 
-  deleteItemAction() {
-    this.actionEventDelete.emit();
+  deleteItemAction(id: string) {
+    this.actionEventDelete.emit(id);
   }
 }
