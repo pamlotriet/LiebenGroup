@@ -11,6 +11,7 @@ export class DropdownComponent {
   options = input<any[]>([]);
   placeholder = input<string>('');
   optionLabel = input<string>('');
+  optionValue = input<string>('');
   control = input<FormControl>(new FormControl());
   valueChange = output();
 

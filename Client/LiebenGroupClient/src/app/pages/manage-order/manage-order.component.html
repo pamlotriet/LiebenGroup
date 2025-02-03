@@ -5,7 +5,7 @@
 
     @for (item of getItems().controls; track item; let i = $index) {
     <div class="flex flex-row gap-4 items-center mt-4 mb-4 ">
-        <app-dropdown [options]="products()" optionLabel="name" optionValue="id" placeholder="Select a Product"
+        <app-dropdown [options]="products()" optionLabel="name" [optionValue]="'id'" placeholder="Select a Product"
             [control]="$any(item.get('productId'))" (valueChange)="onProductSelect($event, i)">
         </app-dropdown>
         <app-input type="number" labelText="Quantity" [control]="$any(item.get('quantity'))"></app-input>

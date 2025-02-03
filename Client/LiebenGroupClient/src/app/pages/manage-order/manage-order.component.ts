@@ -82,7 +82,7 @@ export class ManageOrderComponent implements OnInit {
 
   onProductSelect(event: any, index: number) {
     debugger;
-    const selectedProductId = event.id;
+    const selectedProductId = event;
     const selectedProduct = this.products().find(
       (p) => p.id === selectedProductId
     );
